@@ -22,3 +22,12 @@ kubectl get nodes
 
 EOT
 }
+
+module "kots" {
+  source = "./modules/kots"
+  namespace = "mission-control"
+  ingress_enabled = false
+  kubeconfig_path = module.lke.kubeconfig
+  shared_password = var.shared_password
+  license_path = var.license_path
+}
