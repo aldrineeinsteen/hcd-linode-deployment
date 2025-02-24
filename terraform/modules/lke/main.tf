@@ -23,12 +23,12 @@ resource "linode_lke_cluster" "hcd_cluster" {
 }
 
 
-resource "local_file" "kubeconfig" {
+resource "local_file" "kubeconfig_file" {
   # filename = "${path.module}/kubeconfig"
   content  = base64decode(linode_lke_cluster.hcd_cluster.kubeconfig)
   filename = "${path.module}/kubeconfig"
 }
 
-output "kubeconfig_path" {
-  value = local_file.kubeconfig.filename
+output "kubeconfig" {
+  value = abspath(local_file.kubeconfig_file.filename)
 }
