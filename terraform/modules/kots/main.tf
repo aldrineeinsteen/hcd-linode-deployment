@@ -80,5 +80,5 @@ provider "kubernetes" {
 }
 
 output "namespace" {
-  value = kubernetes_namespace.mission_control.metadata.0.name
+  value = "${var.namespace}"
 }
