@@ -38,3 +38,4 @@ terraform.rc
 
 kubeconfig
 mc_license.yaml
+terraform/bin/kubectl-kots
