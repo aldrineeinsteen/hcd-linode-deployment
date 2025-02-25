@@ -62,4 +62,8 @@ output "mission_control_ui_endpoints" {
 module "hcd-deployment" {
   source = "./modules/hcd-cluster"
   kube_config_path = module.lke.kube_config_path
+  project_name = var.project_name
+  cluster_name = var.cluster_name
+  datacenters = var.datacenters
+  mission_control_ns = module.kots.namespace
 }
