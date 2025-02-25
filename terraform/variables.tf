@@ -47,8 +47,8 @@ variable "cluster_name" {
 variable "datacenters" {
   description = "List of datacenters"
   type = list(object({
-    datacenterName  = string
-    num_racks       = number
-    nodes_per_rack  = number
+    datacenterName = string
+    num_racks      = number
+    nodes_per_rack = number
   }))
 }

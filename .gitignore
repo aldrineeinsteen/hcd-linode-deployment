@@ -47,3 +47,4 @@ terraform/.DS_Store
 terraform/.terraform.lock.hcl
 **/kubeconfig.yaml
 terraform/modules/hcd-cluster/mission_control.yaml
+terraform/modules/lke/external_ips.txt

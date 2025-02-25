@@ -29,7 +29,7 @@ export KUBECONFIG=$(pwd)/terraform/modules/lke/kubeconfig
 kubectl get nodes
 ```
 
-### 3. Installing Mission Control
+### 3. Installing Mission Control (this is also automated)
 ```bash
 # Install cert manager
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.yaml

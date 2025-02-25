@@ -24,10 +24,11 @@ resource "null_resource" "install_kots_cli" {
 }
 
 resource "null_resource" "install_cert_manager" {
-  depends_on = [null_resource.install_kots_cli, kubernetes_namespace.mission_control, local_file.mission_control_config]
+  depends_on = [null_resource.install_kots_cli, kubernetes_namespace.mission_control, local_file.mission_control_config, var.kubeconfig_path]
 
   provisioner "local-exec" {
     command = <<EOT
+    export KUBECONFIG=${var.kubeconfig_path}
     kubectl apply -f https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.yaml
     EOT
   }
@@ -38,6 +39,7 @@ resource "null_resource" "install_kots_admin_console" {
 
   provisioner "local-exec" {
     command = <<EOT
+    export KUBECONFIG=${var.kubeconfig_path}
     kubectl kots install mission-control \
       --namespace "${var.namespace}" \
       --license-file ${var.license_path} \

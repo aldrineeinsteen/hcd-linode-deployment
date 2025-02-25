@@ -30,12 +30,21 @@ resource "local_file" "mission_control_yaml" {
 }
 
 resource "null_resource" "apply_mission_control" {
-  depends_on = [local_file.mission_control_yaml]
+  depends_on = [local_file.mission_control_yaml, kubernetes_namespace.hcd-cluster]
 
   provisioner "local-exec" {
     command = <<EOT
     export KUBECONFIG="${var.kube_config_path}"
-    echo "⏳ Applying dynamically generated Mission Control YAML..."
+    
+    echo "⏳ Waiting for Mission Control CRDs to be ready..."
+    
+    # Wait until the CRD is available
+    until kubectl get crd missioncontrolclusters.missioncontrol.datastax.com; do
+      echo "Waiting for CRDs to be installed..."
+      sleep 10
+    done
+
+    echo "✅ CRDs are installed. Applying dynamically generated Mission Control YAML..."
     kubectl apply -f ${path.module}/mission_control.yaml
     EOT
   }
