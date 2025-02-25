@@ -2,7 +2,7 @@ apiVersion: missioncontrol.datastax.com/v1beta2
 kind: MissionControlCluster
 metadata:
   name: ${cluster_name}
-  namespace: hcd-cluster
+  namespace: ${project_name}
 spec:
   createIssuer: true
   dataApi:

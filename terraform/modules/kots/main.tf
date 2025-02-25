@@ -76,7 +76,7 @@ spec:
     observability_bucket_region:
       value: "${var.s3_region}"
     observability_bucket_secret_access_key:
-      value: "${base64encode(var.s3_secret_key)}"
+      value: "${var.s3_secret_key}"
     observability_enabled:
       default: "1"
     observability_bucket_access_key_id:

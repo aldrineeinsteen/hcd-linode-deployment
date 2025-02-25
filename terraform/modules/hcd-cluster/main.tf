@@ -50,7 +50,3 @@ resource "null_resource" "apply_mission_control" {
     EOT
   }
 }
-
-provider "kubernetes" {
-  config_path = var.kube_config_path
-}
