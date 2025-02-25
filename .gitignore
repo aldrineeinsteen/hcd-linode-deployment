@@ -41,3 +41,4 @@ mc_license.yaml
 terraform/bin/kubectl-kots
 terraform/modules/kots/mission-control-config.yaml
 terraform/modules/kots/mission-control-cluster.yaml
+**/.DS_Store
