@@ -52,3 +52,18 @@ kubectl kots admin-console --namespace mission-control
 kubectl get pods -n ${module.kots.namespace}
 EOT
 }
+
+output "mission_control_ui_endpoints" {
+  depends_on = [ module.kots.kots_admin_console ]
+  value = [for ip in module.lke.node_external_ips : "https://${ip}:30880/ui/"]
+  description = "Mission Control UI endpoints available on all external IPs"
+}
+
+module "hcd-deployment" {
+  source = "./modules/hcd-cluster"
+  kube_config_path = module.lke.kube_config_path
+  project_name = var.project_name
+  cluster_name = var.cluster_name
+  datacenters = var.datacenters
+  mission_control_ns = module.kots.namespace
+}
