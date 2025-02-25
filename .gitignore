@@ -44,3 +44,5 @@ terraform/modules/kots/mission-control-cluster.yaml
 **/.DS_Store
 terraform/.DS_Store
 .DS_Store
+terraform/.terraform.lock.hcl
+**/kubeconfig.yaml
