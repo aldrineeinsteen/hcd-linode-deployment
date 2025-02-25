@@ -1,2 +1,21 @@
 linode_token = "YOUR_LINODE_API_TOKEN"
 region = "us-east"
+shared_password = "password123?"
+license_path = "/Users/aldrine.einsteen/Downloads/mc_license.yaml"
+s3_access_key = "DUMMY"
+s3_secret_key = "DUMMY"
+s3_endpoint = "gb-lon-1.linodeobjects.com"
+project_name = "apiary-project"
+cluster_name = "apiary-info"
+datacenters = [
+    {
+        datacenterName = "gb-lon-dc-1"
+        num_racks = 1
+        nodes_per_rack = 1
+    },
+    {
+        datacenterName = "gb-lon-dc-2"
+        num_racks = 1
+        nodes_per_rack = 1
+    },
+]
