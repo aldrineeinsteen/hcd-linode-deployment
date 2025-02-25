@@ -2,7 +2,8 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/kubernetes" {
-  version = "2.35.1"
+  version     = "2.35.1"
+  constraints = ">= 2.16.1"
   hashes = [
     "h1:zgXeWvp4//Ry+4glwNrLMpPFOU8QBQlARNmR9WCNe9o=",
     "zh:12212ca5ae47823ce14bfafb909eeb6861faf1e2435fb2fc4a8b334b3544b5f5",
@@ -60,7 +61,7 @@ provider "registry.terraform.io/hashicorp/null" {
 
 provider "registry.terraform.io/linode/linode" {
   version     = "2.34.1"
-  constraints = "2.34.1"
+  constraints = ">= 2.34.1"
   hashes = [
     "h1:T9xx8mqH8sOo95URQUmU0jsaTEoliZ1wWVHY7mVCp5o=",
     "zh:02b8a309ec939e50d1593dbece0c329406ee012cb44632cd4f28fcb437022033",
