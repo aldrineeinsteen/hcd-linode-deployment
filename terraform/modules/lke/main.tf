@@ -23,7 +23,7 @@ resource "null_resource" "label_one_node" {
 
   provisioner "local-exec" {
     command = <<EOT
-    export KUBECONFIG=${abspath(local_file.kube_config_file.filename)}
+    export KUBECONFIG="${abspath(local_file.kube_config_file.filename)}"
     
     # Wait for nodes to be ready
     echo "⏳ Waiting for nodes to be ready..."
