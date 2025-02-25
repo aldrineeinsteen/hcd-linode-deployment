@@ -21,6 +21,7 @@ resource "kubernetes_namespace" "hcd-cluster" {
 }
 
 resource "local_file" "mission_control_yaml" {
+  depends_on = [ kubernetes_namespace.hcd-cluster ]
   filename = "${path.module}/mission_control.yaml"
   content  = templatefile("${path.module}/hcd_template.yaml", {
     project_name = var.project_name
