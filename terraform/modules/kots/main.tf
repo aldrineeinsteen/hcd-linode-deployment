@@ -1,3 +1,10 @@
+terraform {
+  required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+    }
+  }
+}
 resource "kubernetes_namespace" "mission_control" {
   metadata {
     name = var.namespace
@@ -73,10 +80,6 @@ spec:
     observability_bucket_access_key_id:
       value: "${var.s3_access_key}"
 EOT
-}
-
-provider "kubernetes" {
-  config_path = var.kubeconfig_path
 }
 
 output "namespace" {

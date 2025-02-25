@@ -6,10 +6,6 @@ terraform {
   }
 }
 
-provider "linode" {
-  token      = var.linode_token
-}
-
 resource "linode_object_storage_bucket" "mimir-bucket" {
   label  = "mimir-bucket"
   region = var.region

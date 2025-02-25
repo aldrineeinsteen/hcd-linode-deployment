@@ -6,10 +6,6 @@ terraform {
   }
 }
 
-provider "linode" {
-  token = var.linode_token
-}
-
 resource "linode_lke_cluster" "hcd_cluster" {
   label   = "hcd-cluster"
   region  = var.region
@@ -27,7 +23,7 @@ resource "null_resource" "label_one_node" {
 
   provisioner "local-exec" {
     command = <<EOT
-    export KUBECONFIG=${abspath(local_file.kubeconfig_file.filename)}
+    export KUBECONFIG=${abspath(local_file.kube_config_file.filename)}
     
     # Wait for nodes to be ready
     echo "⏳ Waiting for nodes to be ready..."
@@ -49,12 +45,12 @@ resource "null_resource" "label_one_node" {
 }
 
 
-resource "local_file" "kubeconfig_file" {
+resource "local_file" "kube_config_file" {
   # filename = "${path.module}/kubeconfig"
   content  = base64decode(linode_lke_cluster.hcd_cluster.kubeconfig)
-  filename = "${path.module}/kubeconfig"
+  filename = "${path.module}/kubeconfig.yaml"
 }
 
-output "kubeconfig" {
-  value = abspath(local_file.kubeconfig_file.filename)
+output "kube_config_path" {
+  value = abspath(local_file.kube_config_file.filename)
 }

@@ -15,7 +15,7 @@ output "kubeconfig" {
   value = <<EOT
 
 # Run the following command to configure kubectl:
-export KUBECONFIG="${module.lke.kubeconfig}"
+export KUBECONFIG="${module.lke.kube_config_path}"
 
 # To verify your cluster is working, run:
 kubectl get nodes
@@ -23,11 +23,16 @@ kubectl get nodes
 EOT
 }
 
+provider "kubernetes" {
+  config_path = module.lke.kube_config_path
+  
+}
+
 module "kots" {
   source            = "./modules/kots"
   namespace         = "mission-control"
   ingress_enabled   = false
-  kubeconfig_path   = module.lke.kubeconfig
+  kubeconfig_path   = module.lke.kube_config_path
   shared_password   = var.shared_password
   license_path      = var.license_path
   s3_access_key     = var.s3_access_key
