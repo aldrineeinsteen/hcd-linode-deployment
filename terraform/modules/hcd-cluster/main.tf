@@ -6,7 +6,25 @@ terraform {
   }
 }
 
+resource "null_resource" "wait_for_mission_control" {
+  provisioner "local-exec" {
+    command = <<EOT
+    export KUBECONFIG="${var.kube_config_path}"
+    
+    echo "⏳ Waiting for Mission Control to be available..."
+    
+    until kubectl get pods -n mission-control | grep -E "mission-control-ui|mission-control-aggregator" | grep "1/1"; do
+      echo "Waiting for Mission Control pods to be running..."
+      sleep 10
+    done
+
+    echo "✅ Mission Control is up and running."
+    EOT
+  }
+}
+
 resource "kubernetes_namespace" "hcd-cluster" {
+  depends_on = [ null_resource.wait_for_mission_control ]
   metadata {
     name = var.project_name
 
